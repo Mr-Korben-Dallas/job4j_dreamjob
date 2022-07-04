@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link th:insert="~{fragments/head :: link-bootstrap}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script  th:insert="~{fragments/head :: script-jquery}"></script>
   <script  th:insert="~{fragments/head :: script-popper}"></script>
   <script  th:insert="~{fragments/head :: script-bootstrap}"></script>
@@ -27,7 +28,12 @@
           <tbody>
           <tr th:each="post: ${posts}">
             <td th:text="${post.id}" />
-            <td th:text="${post.name}" />
+            <td>
+              <a th:href="@{|/formUpdatePost/${post.id}|}">
+                <i class="fa fa-edit"></i>
+              </a>
+              <span th:text="${post.name}"></span>
+            </td>
             <td th:text="${post.description}" />
             <td th:text="${post.created}" />
           </tr>
