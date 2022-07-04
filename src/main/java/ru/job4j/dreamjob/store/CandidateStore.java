@@ -28,4 +28,12 @@ public class CandidateStore {
     public boolean add(Candidate candidate) {
         return candidates.put(candidate.getId(), candidate) != null;
     }
+
+    public Candidate findById(int id) {
+        return candidates.get(id);
+    }
+
+    public boolean update(Candidate candidate) {
+        return candidates.replace(candidate.getId(), candidate) != null;
+    }
 }
