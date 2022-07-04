@@ -13,8 +13,10 @@
 </head>
 <body>
     <div th:insert="~{fragments/navigation-menu :: navigation}"></div>
-    <a class="nav-item nav-link" th:href="@{/formAddPost}">Добавить вакансию</a>
-    <a class="nav-item nav-link" th:href="@{/formAddPost}">Добавить кандидата</a>
+    <div>
+        <a class="nav-item nav-link" th:href="@{/formAddPost}">Добавить вакансию</a>
+        <a class="nav-item nav-link" th:href="@{/formAddPost}">Добавить кандидата</a>
+    </div>
 </div>
 </body>
 </html>
