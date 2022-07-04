@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class PostStore {
     private static final PostStore INST = new PostStore();
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
-    private final AtomicInteger USER_ID = new AtomicInteger(0);
+    private final AtomicInteger USER_ID = new AtomicInteger();
 
     private PostStore() {
         posts.put(1, new Post(USER_ID.incrementAndGet(), "Tom", "Junior Java Job"));
