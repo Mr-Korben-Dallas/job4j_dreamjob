@@ -24,4 +24,8 @@ public class CandidateStore {
     public Collection<Candidate> findAll() {
         return candidates.values();
     }
+
+    public boolean add(Candidate candidate) {
+        return candidates.put(candidate.getId(), candidate) != null;
+    }
 }
