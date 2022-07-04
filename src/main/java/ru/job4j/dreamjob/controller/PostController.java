@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.store.PostStore;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Controller
 public class PostController {
     private final PostStore store = PostStore.instOf();
@@ -17,13 +15,13 @@ public class PostController {
     @GetMapping("/posts")
     public String posts(Model model) {
         model.addAttribute("posts", store.findAll());
-        return "posts";
+        return "post/posts";
     }
 
     @GetMapping("/formAddPost")
     public String addPost(Model model) {
         model.addAttribute("post", new Post(0, "Заполните поле"));
-        return "addPost";
+        return "post/addPost";
     }
 
     @PostMapping("/createPost")

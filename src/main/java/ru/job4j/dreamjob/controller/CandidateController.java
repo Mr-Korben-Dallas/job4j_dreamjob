@@ -15,13 +15,13 @@ public class CandidateController {
     @GetMapping("/candidates")
     public String candidates(Model model) {
         model.addAttribute("candidates", store.findAll());
-        return "candidates";
+        return "candidate/candidates";
     }
 
     @GetMapping("/formAddCandidate")
     public String addPost(Model model) {
         model.addAttribute("candidate", new Candidate(0, "Заполните поле"));
-        return "addCandidate";
+        return "candidate/addCandidate";
     }
 
     @PostMapping("/createCandidate")
