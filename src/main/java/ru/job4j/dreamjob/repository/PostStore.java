@@ -16,9 +16,9 @@ public class PostStore implements Store<Post> {
     private final AtomicInteger userid = new AtomicInteger();
 
     private PostStore() {
-        posts.put(1, new Post(userid.incrementAndGet(), "Tom", "Junior Java Job"));
-        posts.put(2, new Post(userid.incrementAndGet(), "John", "Middle Java Job"));
-        posts.put(3, new Post(userid.incrementAndGet(), "Robert", "Senior Java Job"));
+        posts.put(1, new Post(userid.incrementAndGet(), "Tom", "Junior Java Job", true));
+        posts.put(2, new Post(userid.incrementAndGet(), "John", "Middle Java Job", false));
+        posts.put(3, new Post(userid.incrementAndGet(), "Robert", "Senior Java Job", true));
     }
 
     public Post findById(int id) {
