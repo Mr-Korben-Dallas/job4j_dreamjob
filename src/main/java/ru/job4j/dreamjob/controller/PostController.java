@@ -11,15 +11,15 @@ import ru.job4j.dreamjob.service.PostService;
 
 @Controller
 public class PostController {
-    private final PostService SERVICE;
+    private final PostService service;
 
     public PostController(PostService service) {
-        this.SERVICE = service;
+        this.service = service;
     }
 
     @GetMapping("/posts")
     public String posts(Model model) {
-        model.addAttribute("posts", SERVICE.findAll());
+        model.addAttribute("posts", service.findAll());
         return "post/posts";
     }
 
@@ -31,19 +31,19 @@ public class PostController {
 
     @PostMapping("/createPost")
     public String createPost(@ModelAttribute Post post) {
-        SERVICE.add(post);
+        service.add(post);
         return "redirect:/posts";
     }
 
     @PostMapping("/updatePost")
     public String updatePost(@ModelAttribute Post post) {
-        SERVICE.update(post);
+        service.update(post);
         return "redirect:/posts";
     }
 
     @GetMapping("/formUpdatePost/{postId}")
     public String formUpdatePost(Model model, @PathVariable("postId") int id) {
-        model.addAttribute("post", SERVICE.findById(id));
+        model.addAttribute("post", service.findById(id));
         return "post/updatePost";
     }
 }

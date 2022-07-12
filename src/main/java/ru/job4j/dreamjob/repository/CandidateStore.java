@@ -11,12 +11,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Repository
 public class CandidateStore implements Store<Candidate> {
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
-    private final AtomicInteger CANDIDATE_ID = new AtomicInteger();
+    private final AtomicInteger candidateId = new AtomicInteger();
 
     public CandidateStore() {
-        candidates.put(1, new Candidate(CANDIDATE_ID.incrementAndGet(), "JAVA Software Developer", "Scream fiery like a black tobacco."));
-        candidates.put(2, new Candidate(CANDIDATE_ID.incrementAndGet(), "Jr. JAVA v.11 Developer Associate", "The sun acquires."));
-        candidates.put(3, new Candidate(CANDIDATE_ID.incrementAndGet(), "JAVA Developer", "The transformator is more pathway now than species. calm and unearthly harmless."));
+        candidates.put(1, new Candidate(candidateId.incrementAndGet(), "JAVA Software Developer", "Scream fiery like a black tobacco."));
+        candidates.put(2, new Candidate(candidateId.incrementAndGet(), "Jr. JAVA v.11 Developer Associate", "The sun acquires."));
+        candidates.put(3, new Candidate(candidateId.incrementAndGet(), "JAVA Developer", "The transformator is more pathway now than species. calm and unearthly harmless."));
     }
 
     public Collection<Candidate> findAll() {
@@ -37,7 +37,7 @@ public class CandidateStore implements Store<Candidate> {
 
     private int incrementId(Candidate candidate) {
         if (candidate.getId() == 0) {
-            candidate.setId(CANDIDATE_ID.incrementAndGet());
+            candidate.setId(candidateId.incrementAndGet());
         }
         return candidate.getId();
     }

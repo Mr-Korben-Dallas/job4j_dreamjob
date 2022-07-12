@@ -9,29 +9,29 @@ import java.util.Collection;
 
 @Service
 public class CandidateService implements ru.job4j.dreamjob.service.Service<Candidate> {
-    private final Store<Candidate> STORE;
+    private final Store<Candidate> store;
 
     private CandidateService(CandidateStore store) {
-        this.STORE = store;
+        this.store = store;
     }
 
     @Override
     public Candidate findById(int id) {
-        return STORE.findById(id);
+        return store.findById(id);
     }
 
     @Override
     public Collection<Candidate> findAll() {
-        return STORE.findAll();
+        return store.findAll();
     }
 
     @Override
     public boolean add(Candidate candidate) {
-        return STORE.add(candidate);
+        return store.add(candidate);
     }
 
     @Override
     public boolean update(Candidate candidate) {
-        return STORE.update(candidate);
+        return store.update(candidate);
     }
 }

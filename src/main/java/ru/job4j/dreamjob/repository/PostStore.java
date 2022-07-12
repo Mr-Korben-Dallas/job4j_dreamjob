@@ -11,12 +11,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Repository
 public class PostStore implements Store<Post> {
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
-    private final AtomicInteger USER_ID = new AtomicInteger();
+    private final AtomicInteger userid = new AtomicInteger();
 
     private PostStore() {
-        posts.put(1, new Post(USER_ID.incrementAndGet(), "Tom", "Junior Java Job"));
-        posts.put(2, new Post(USER_ID.incrementAndGet(), "John", "Middle Java Job"));
-        posts.put(3, new Post(USER_ID.incrementAndGet(), "Robert", "Senior Java Job"));
+        posts.put(1, new Post(userid.incrementAndGet(), "Tom", "Junior Java Job"));
+        posts.put(2, new Post(userid.incrementAndGet(), "John", "Middle Java Job"));
+        posts.put(3, new Post(userid.incrementAndGet(), "Robert", "Senior Java Job"));
     }
 
     public Post findById(int id) {
@@ -37,7 +37,7 @@ public class PostStore implements Store<Post> {
 
     private int incrementId(Post post) {
         if (post.getId() == 0) {
-            post.setId(USER_ID.incrementAndGet());
+            post.setId(userid.incrementAndGet());
         }
         return post.getId();
     }

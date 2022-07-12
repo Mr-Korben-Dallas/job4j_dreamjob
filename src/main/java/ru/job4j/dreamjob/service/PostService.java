@@ -9,29 +9,29 @@ import java.util.Collection;
 
 @Service
 public class PostService implements ru.job4j.dreamjob.service.Service<Post> {
-    private final Store<Post> STORE;
+    private final Store<Post> store;
 
     private PostService(PostStore store) {
-        this.STORE = store;
+        this.store = store;
     }
 
     @Override
     public Post findById(int id) {
-        return STORE.findById(id);
+        return store.findById(id);
     }
 
     @Override
     public Collection<Post> findAll() {
-        return STORE.findAll();
+        return store.findAll();
     }
 
     @Override
     public boolean add(Post post) {
-        return STORE.add(post);
+        return store.add(post);
     }
 
     @Override
     public boolean update(Post post) {
-        return STORE.update(post);
+        return store.update(post);
     }
 }
