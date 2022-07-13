@@ -2,6 +2,7 @@ package ru.job4j.dreamjob.repository;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
+import ru.job4j.dreamjob.model.City;
 import ru.job4j.dreamjob.model.Post;
 
 import java.util.Collection;
@@ -16,9 +17,9 @@ public class PostStore implements Store<Post> {
     private final AtomicInteger userid = new AtomicInteger();
 
     private PostStore() {
-        posts.put(1, new Post(userid.incrementAndGet(), "Tom", "Junior Java Job", true));
-        posts.put(2, new Post(userid.incrementAndGet(), "John", "Middle Java Job", false));
-        posts.put(3, new Post(userid.incrementAndGet(), "Robert", "Senior Java Job", true));
+        posts.put(1, new Post(userid.incrementAndGet(), "Tom", "Junior Java Job", true, new City(1, "Moskow")));
+        posts.put(2, new Post(userid.incrementAndGet(), "John", "Middle Java Job", false, new City(2, "Saint Petersburg")));
+        posts.put(3, new Post(userid.incrementAndGet(), "Robert", "Senior Java Job", true, new City(3, "Yekaterinburg")));
     }
 
     public Post findById(int id) {
