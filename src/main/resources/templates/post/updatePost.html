@@ -12,6 +12,7 @@
                     <div class="card-body">
                         <form th:action="@{/updatePost}" th:object="${post}" method="POST">
                             <input type="hidden" name="id" th:field="*{id}"/>
+                            <input type="hidden" name="isVisible" th:field="*{isVisible}"/>
                             <div class="form-group">
                                 <label for="name">Имя</label>
                                 <input type="text" class="form-control" name="name" id="name" th:field="*{name}">

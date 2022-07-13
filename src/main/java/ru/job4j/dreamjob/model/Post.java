@@ -63,12 +63,12 @@ public class Post implements Serializable {
         this.name = name;
     }
 
-    public boolean isVisible() {
+    public boolean getIsVisible() {
         return isVisible;
     }
 
-    public void setVisible(boolean visible) {
-        isVisible = visible;
+    public void setIsVisible(boolean isVisible) {
+        this.isVisible = isVisible;
     }
 
     @Override
