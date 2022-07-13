@@ -23,7 +23,7 @@
                             <div class="form-group">
                                 <label for="city.id">Город</label>
                                 <select class="form-control" id="city.id" name="city.id">
-                                    <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}"></option>
+                                    <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}" th:selected="${city == post.getCity()}"></option>
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-primary">Сохранить</button>

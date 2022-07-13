@@ -17,7 +17,7 @@ public class CityStore implements Store<City> {
     private final AtomicInteger cityId = new AtomicInteger();
 
     public CityStore() {
-        cities.put(1, new City(cityId.incrementAndGet(), "Moskow"));
+        cities.put(1, new City(cityId.incrementAndGet(), "Moscow"));
         cities.put(2, new City(cityId.incrementAndGet(), "Saint Petersburg"));
         cities.put(3, new City(cityId.incrementAndGet(), "Yekaterinburg"));
     }
