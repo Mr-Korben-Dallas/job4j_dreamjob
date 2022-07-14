@@ -10,7 +10,7 @@
                         Редатирование кандидата:
                     </div>
                     <div class="card-body">
-                        <form th:action="@{/updateCandidate}" th:object="${candidate}" method="POST">
+                        <form th:action="@{/updateCandidate}" th:object="${candidate}" method="POST" enctype="multipart/form-data">
                             <input type="hidden" name="id" th:field="*{id}"/>
                             <div class="form-group">
                                 <label for="name">Имя</label>
@@ -18,6 +18,11 @@
                                 <br>
                                 <label for="name">Описание</label>
                                 <input type="text" class="form-control" name="description" id="description" th:field="*{description}">
+                                <br>
+                                <div class="form-group">
+                                    <label for="name">Фотография</label>
+                                    <input type="file" class="form-control" name="file" id="file">
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Сохранить</button>
                         </form>
