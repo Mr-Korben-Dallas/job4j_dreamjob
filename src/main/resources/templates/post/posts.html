@@ -30,7 +30,8 @@
               </span>
             </td>
             <td th:text="${post.description}" />
-            <td th:text="${post.created}" />
+            <td th:text="${post.city.getName()}" />
+            <td th:text="${#temporals.format(post.created, 'dd-MM-yyyy HH:mm')}" />
           </tr>
           </tbody>
         </table>
