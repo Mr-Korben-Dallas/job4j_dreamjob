@@ -7,7 +7,7 @@ public interface Store<T> {
 
     Collection<T> findAll();
 
-    boolean add(T t);
+    T add(T t);
 
     boolean update(T t);
 }

@@ -25,8 +25,8 @@ public class CandidateStore implements Store<Candidate> {
         return candidates.values();
     }
 
-    public boolean add(Candidate candidate) {
-        return candidates.put(incrementId(candidate), candidate) != null;
+    public Candidate add(Candidate candidate) {
+        return candidates.put(incrementId(candidate), candidate);
     }
 
     public Candidate findById(int id) {

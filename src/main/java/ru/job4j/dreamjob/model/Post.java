@@ -33,6 +33,15 @@ public class Post implements Serializable {
         this.city = city;
     }
 
+    public Post(int id, String name, String description, boolean isVisible, City city, LocalDateTime created) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.isVisible = isVisible;
+        this.city = city;
+        this.created = created;
+    }
+
     public String getDescription() {
         return description;
     }

@@ -25,7 +25,7 @@ public class CityService {
         return store.findAll();
     }
 
-    public boolean add(City city) {
+    public City add(City city) {
         return store.add(city);
     }
 

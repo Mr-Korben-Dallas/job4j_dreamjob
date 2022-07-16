@@ -30,8 +30,8 @@ public class PostStore implements Store<Post> {
         return posts.values();
     }
 
-    public boolean add(Post post) {
-        return posts.put(incrementId(post), post) != null;
+    public Post add(Post post) {
+        return posts.put(incrementId(post), post);
     }
 
     public boolean update(Post post) {

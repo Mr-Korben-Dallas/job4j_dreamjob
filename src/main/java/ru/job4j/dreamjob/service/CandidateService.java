@@ -25,7 +25,7 @@ public class CandidateService {
         return store.findAll();
     }
 
-    public boolean add(Candidate candidate) {
+    public Candidate add(Candidate candidate) {
         return store.add(candidate);
     }
 

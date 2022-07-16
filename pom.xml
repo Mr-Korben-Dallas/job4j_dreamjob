@@ -15,7 +15,10 @@
     <name>Job4j Dream Job</name>
 
     <properties>
-        <java.version>17</java.version>
+        <maven.compiler.source>18</maven.compiler.source>
+        <maven.compiler.target>18</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>18</java.version>
     </properties>
 
     <dependencies>

@@ -2,7 +2,6 @@ package ru.job4j.dreamjob.repository;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
-import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.model.City;
 
 import java.util.Collection;
@@ -33,8 +32,8 @@ public class CityStore implements Store<City> {
     }
 
     @Override
-    public boolean add(City city) {
-        return cities.put(incrementId(city), city) != null;
+    public City add(City city) {
+        return cities.put(incrementId(city), city);
     }
 
     @Override
