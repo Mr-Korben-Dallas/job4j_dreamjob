@@ -33,7 +33,8 @@ public class PostController {
     }
 
     @PostMapping("/createPost")
-    public String createPost(@ModelAttribute Post post) {
+    public String createPost(@ModelAttribute Post post, @RequestParam("city.id") int id) {
+        post.setCity(cityService.findById(id));
         service.add(post);
         return "redirect:/posts";
     }
