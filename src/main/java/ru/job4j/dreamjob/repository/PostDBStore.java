@@ -80,8 +80,10 @@ public class PostDBStore implements Store<Post> {
     @Override
     public Post add(Post post) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement(TABLE_POSTS_QUERY_ADD,
-                     PreparedStatement.RETURN_GENERATED_KEYS)
+             PreparedStatement ps =  cn.prepareStatement(
+                     TABLE_POSTS_QUERY_ADD,
+                     PreparedStatement.RETURN_GENERATED_KEYS
+             )
         ) {
             ps.setString(1, post.getName());
             ps.setInt(2, post.getCity().getId());
