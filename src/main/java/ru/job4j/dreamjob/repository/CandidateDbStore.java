@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.repository;
 
+import lombok.extern.slf4j.Slf4j;
 import net.jcip.annotations.ThreadSafe;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.stereotype.Repository;
@@ -12,7 +13,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
+@Slf4j
 @ThreadSafe
 @Repository
 public class CandidateDbStore implements Store<Candidate> {
@@ -44,7 +47,7 @@ public class CandidateDbStore implements Store<Candidate> {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error when findById", e);
         }
         return null;
     }
@@ -69,13 +72,13 @@ public class CandidateDbStore implements Store<Candidate> {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error when findAll", e);
         }
         return candidates;
     }
 
     @Override
-    public Candidate add(Candidate candidate) {
+    public Optional<Candidate> add(Candidate candidate) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement(
                      TABLE_POSTS_QUERY_ADD,
@@ -93,9 +96,9 @@ public class CandidateDbStore implements Store<Candidate> {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error when add", e);
         }
-        return candidate;
+        return Optional.ofNullable(candidate);
     }
 
     @Override
@@ -111,7 +114,7 @@ public class CandidateDbStore implements Store<Candidate> {
             ps.setInt(5, candidate.getId());
             ps.execute();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error when update", e);
         }
         return result;
     }

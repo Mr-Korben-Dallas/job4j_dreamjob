@@ -6,6 +6,7 @@ import ru.job4j.dreamjob.model.Candidate;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -25,8 +26,8 @@ public class CandidateStore implements Store<Candidate> {
         return candidates.values();
     }
 
-    public Candidate add(Candidate candidate) {
-        return candidates.put(incrementId(candidate), candidate);
+    public Optional<Candidate> add(Candidate candidate) {
+        return Optional.ofNullable(candidates.put(incrementId(candidate), candidate));
     }
 
     public Candidate findById(int id) {

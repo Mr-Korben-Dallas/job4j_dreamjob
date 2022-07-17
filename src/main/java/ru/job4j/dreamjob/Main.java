@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
+@Slf4j
 @SpringBootApplication
 public class Main {
     public static void main(String[] args) {
@@ -25,12 +27,12 @@ public class Main {
         )) {
             cfg.load(io);
         } catch (Exception e) {
-            throw new IllegalStateException(e);
+            log.error("Error when loadDbProperties()", e, new IllegalStateException(e));
         }
         try {
             Class.forName(cfg.getProperty("jdbc.driver"));
         } catch (Exception e) {
-            throw new IllegalStateException(e);
+            log.error("Error when getProperty in loadDbProperties()", e, new IllegalStateException(e));
         }
         return cfg;
     }

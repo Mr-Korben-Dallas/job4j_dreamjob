@@ -26,7 +26,7 @@ public class UserService {
     }
 
     public Optional<User> add(User user) {
-        return Optional.ofNullable(store.add(user));
+        return store.add(user);
     }
 
     public boolean update(User user) {

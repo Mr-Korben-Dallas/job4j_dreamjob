@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.repository;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,7 @@ import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.*;
 
+@Slf4j
 class PostDBStoreTest {
     private static Connection connection;
 
@@ -32,7 +34,7 @@ class PostDBStoreTest {
                     config.getProperty("jdbc.password")
             );
         } catch (Exception e) {
-            throw new IllegalStateException(e);
+            log.error("Error when initConnection()", e, new IllegalStateException(e));
         }
     }
 

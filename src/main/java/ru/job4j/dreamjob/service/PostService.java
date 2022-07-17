@@ -7,6 +7,7 @@ import ru.job4j.dreamjob.repository.Store;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @ThreadSafe
 @Service
@@ -33,7 +34,7 @@ public class PostService {
         return store.findAll();
     }
 
-    public Post add(Post post) {
+    public Optional<Post> add(Post post) {
         return store.add(post);
     }
 

@@ -7,6 +7,7 @@ import ru.job4j.dreamjob.repository.CityStore;
 import ru.job4j.dreamjob.repository.Store;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @ThreadSafe
 @Service
@@ -25,7 +26,7 @@ public class CityService {
         return store.findAll();
     }
 
-    public City add(City city) {
+    public Optional<City> add(City city) {
         return store.add(city);
     }
 

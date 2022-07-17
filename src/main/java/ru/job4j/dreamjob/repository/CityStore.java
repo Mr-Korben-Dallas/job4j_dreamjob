@@ -6,6 +6,7 @@ import ru.job4j.dreamjob.model.City;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -32,8 +33,8 @@ public class CityStore implements Store<City> {
     }
 
     @Override
-    public City add(City city) {
-        return cities.put(incrementId(city), city);
+    public Optional<City> add(City city) {
+        return Optional.ofNullable(cities.put(incrementId(city), city));
     }
 
     @Override

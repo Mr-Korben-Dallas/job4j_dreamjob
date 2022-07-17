@@ -1,5 +1,7 @@
 package ru.job4j.dreamjob.repository;
 
+import lombok.extern.slf4j.Slf4j;
+import net.jcip.annotations.ThreadSafe;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Post;
@@ -12,7 +14,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
+@Slf4j
+@ThreadSafe
 @Repository
 public class PostDBStore implements Store<Post> {
     private final BasicDataSource pool;
@@ -46,7 +51,7 @@ public class PostDBStore implements Store<Post> {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error when findById", e);
         }
         return null;
     }
@@ -72,13 +77,13 @@ public class PostDBStore implements Store<Post> {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error when findAll", e);
         }
         return posts;
     }
 
     @Override
-    public Post add(Post post) {
+    public Optional<Post> add(Post post) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =  cn.prepareStatement(
                      TABLE_POSTS_QUERY_ADD,
@@ -97,9 +102,9 @@ public class PostDBStore implements Store<Post> {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error when add", e);
         }
-        return post;
+        return Optional.ofNullable(post);
     }
 
     @Override
@@ -115,7 +120,7 @@ public class PostDBStore implements Store<Post> {
             ps.setInt(6, post.getId());
             ps.execute();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Error when update", e);
         }
         return result;
     }

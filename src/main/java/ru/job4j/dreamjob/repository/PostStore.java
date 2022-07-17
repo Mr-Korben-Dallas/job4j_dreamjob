@@ -7,6 +7,7 @@ import ru.job4j.dreamjob.model.Post;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -30,8 +31,8 @@ public class PostStore implements Store<Post> {
         return posts.values();
     }
 
-    public Post add(Post post) {
-        return posts.put(incrementId(post), post);
+    public Optional<Post> add(Post post) {
+        return Optional.ofNullable(posts.put(incrementId(post), post));
     }
 
     public boolean update(Post post) {
