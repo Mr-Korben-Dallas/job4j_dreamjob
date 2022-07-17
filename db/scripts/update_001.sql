@@ -15,3 +15,11 @@ CREATE TABLE IF NOT EXISTS candidates (
     photo bytea
 );
 
+CREATE TABLE IF NOT EXISTS users (
+  id SERIAL PRIMARY KEY,
+  name TEXT not null,
+  email TEXT not null,
+  password TEXT not null
+);
+
+ALTER TABLE users ADD CONSTRAINT email_unique UNIQUE (email);
