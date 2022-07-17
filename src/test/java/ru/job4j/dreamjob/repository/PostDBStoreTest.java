@@ -1,17 +1,53 @@
 package ru.job4j.dreamjob.repository;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.event.annotation.AfterTestClass;
 import ru.job4j.dreamjob.Main;
 import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.service.CityService;
 
+import java.io.InputStream;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.*;
 
 class PostDBStoreTest {
+    private static Connection connection;
+
+    @BeforeEach
+    public void initConnection() {
+        try (InputStream in = PostDBStoreTest.class.getClassLoader().getResourceAsStream("db.properties")) {
+            Properties config = new Properties();
+            config.load(in);
+            Class.forName(config.getProperty("jdbc.driver"));
+            connection = DriverManager.getConnection(
+                    config.getProperty("jdbc.url"),
+                    config.getProperty("jdbc.username"),
+                    config.getProperty("jdbc.password")
+            );
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    @AfterTestClass
+    public void closeConnection() throws SQLException {
+        connection.close();
+    }
+
+    @AfterEach
+    public void wipeTable() throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement("delete from posts")) {
+            statement.execute();
+        }
+    }
+
     @Test
     public void whenAddPost() {
         CityService cityService = new CityService(new CityStore());
