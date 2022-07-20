@@ -11,6 +11,8 @@ import ru.job4j.dreamjob.model.User;
 import ru.job4j.dreamjob.service.UserDetailService;
 import ru.job4j.dreamjob.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @ThreadSafe
@@ -25,29 +27,35 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String signup(Model model, @ModelAttribute User user) {
+    public String signup(Model model, @ModelAttribute User user,
+                         HttpServletRequest req) {
         Optional<User> regUser = service.add(user);
         if (regUser.isEmpty()) {
             return "redirect:/signup?fail=true";
         }
+        HttpSession session = req.getSession();
+        session.setAttribute("user", regUser.get());
         return "redirect:/posts";
     }
 
     @GetMapping("/signup")
-    public String signup(Model model, @RequestParam(name = "fail", required = false) Boolean fail) {
-        model.addAttribute("user", new User());
+    public String signup(Model model, @RequestParam(name = "fail", required = false) Boolean fail, HttpSession session) {
+        User user = service.userFromSession(session);
+        model.addAttribute("user", user);
         model.addAttribute("fail", fail != null);
         return "user/signup";
     }
 
     @GetMapping("/login")
-    public String loginPage(Model model, @RequestParam(name = "fail", required = false) Boolean fail) {
+    public String loginPage(Model model, @RequestParam(name = "fail", required = false) Boolean fail, HttpSession session) {
+        User user = service.userFromSession(session);
+        model.addAttribute("user", user);
         model.addAttribute("fail", fail != null);
         return "login";
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute User user) {
+    public String login(@ModelAttribute User user, HttpServletRequest req) {
         Optional<User> userDb = userDetailService.findUserByEmailAndPwd(
                 user.getEmail(), user.getPassword()
         );
@@ -55,6 +63,8 @@ public class UserController {
         if (userDb.isEmpty()) {
             return "redirect:/login?fail=true";
         }
+        HttpSession session = req.getSession();
+        session.setAttribute("user", userDb.get());
         return "redirect:/index";
     }
 }

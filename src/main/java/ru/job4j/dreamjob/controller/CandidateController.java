@@ -6,32 +6,41 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.job4j.dreamjob.model.Candidate;
+import ru.job4j.dreamjob.model.User;
 import ru.job4j.dreamjob.service.CandidateService;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import ru.job4j.dreamjob.service.UserService;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @ThreadSafe
 @Controller
 public class CandidateController {
     private final CandidateService service;
+    private final UserService userService;
 
-    public CandidateController(CandidateService service) {
+    public CandidateController(CandidateService service, UserService userService) {
         this.service = service;
+        this.userService = userService;
     }
 
     @GetMapping("/candidates")
-    public String candidates(Model model) {
+    public String candidates(Model model, HttpSession session) {
+        User user = userService.userFromSession(session);
+        model.addAttribute("user", user);
         model.addAttribute("candidates", service.findAll());
         return "candidate/candidates";
     }
 
     @GetMapping("/formAddCandidate")
-    public String addPost(Model model) {
+    public String addPost(Model model, HttpSession session) {
+        User user = userService.userFromSession(session);
+        model.addAttribute("user", user);
         model.addAttribute("candidate", new Candidate(0, "Заполните поле"));
         return "candidate/addCandidate";
     }
